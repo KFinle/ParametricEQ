@@ -10,6 +10,18 @@
 
 #include <JuceHeader.h>
 
+// Get plugin parameters
+struct ChainSettings
+{
+    float peak1_freq { 0 }, peak1_gain_db { 0 }, peak1_q { 1.f};
+    float peak2_freq { 0 }, peak2_gain_db { 0 }, peak2_q { 1.f};
+    float peak3_freq { 0 }, peak3_gain_db { 0 }, peak3_q { 1.f};
+    float low_cut_freq { 0 }, high_cut_freq { 0 };
+    int low_cut_slope { 0 }, high_cut_slope { 0 };
+};
+
+ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
+
 //==============================================================================
 /**
 */
@@ -69,6 +81,16 @@ private:
     using MonoChain = juce::dsp::ProcessorChain<CutFilter, Filter, Filter, Filter, CutFilter>;
     
     MonoChain left_chain, right_chain;
+    
+    // Order of audio chain
+    enum ChainPositions
+    {
+        LowCut,
+        Peak1,
+        Peak2,
+        Peak3,
+        HiCut
+    };
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ParametricEQAudioProcessor)
