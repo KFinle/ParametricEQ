@@ -10,6 +10,15 @@
 
 #include <JuceHeader.h>
 
+// To help with slope int expressions
+enum Slope
+{
+    Slope_12,
+    Slope_24,
+    Slope_36,
+    Slope_48
+};
+
 // Get plugin parameters
 struct ChainSettings
 {
@@ -17,8 +26,10 @@ struct ChainSettings
     float peak2_freq { 0 }, peak2_gain_db { 0 }, peak2_q { 1.f};
     float peak3_freq { 0 }, peak3_gain_db { 0 }, peak3_q { 1.f};
     float low_cut_freq { 0 }, high_cut_freq { 0 };
-    int low_cut_slope { 0 }, high_cut_slope { 0 };
+    int low_cut_slope { Slope::Slope_12 }, high_cut_slope { Slope::Slope_12 };
 };
+
+
 
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 
