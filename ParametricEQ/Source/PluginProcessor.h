@@ -81,7 +81,7 @@ public:
     
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
-    juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Paramters", createParameterLayout()};
+    juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
 
 private:
     
@@ -102,6 +102,13 @@ private:
         Peak3,
         HiCut
     };
+    
+    
+    void updatePeakFilter(const ChainSettings& chain_settings);
+    
+    using Coefficients = Filter::CoefficientsPtr;
+    static void updateCoefficients(Coefficients& old, const Coefficients& replace);
+    
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ParametricEQAudioProcessor)
