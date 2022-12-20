@@ -153,6 +153,10 @@ private:
         }
     }
     
+    void updateLowCutFilters(const ChainSettings& chain_settings);
+    void updateHighCutFilters(const ChainSettings& chain_settings);
+    void updateFilters();
+    
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ParametricEQAudioProcessor)
